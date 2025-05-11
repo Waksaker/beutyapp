@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ForgotController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// login
+Route::get('/', [LoginController::class, 'showlogin'])->name('showlogin');
+
+// register
+Route::get('/register', [RegisterController::class, 'showregister'])->name('showregister');
+Route::post('/registeraction', [RegisterController::class, 'registeraction'])->name('registeraction');
+
+// forgot password
+Route::get('/forgot', [ForgotController::class, 'showforgot'])->name('showforgot');
+
+// dashboard
+Route::get('/dashboard', [DashboardController::class, 'showdash'])->name('showdash');
