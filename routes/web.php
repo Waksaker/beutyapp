@@ -19,6 +19,7 @@ use App\Http\Controllers\DashboardController;
 
 // login
 Route::get('/', [LoginController::class, 'showlogin'])->name('showlogin');
+Route::post('/loginaction', [LoginController::class, 'loginaction'])->name('loginaction');
 
 // register
 Route::get('/register', [RegisterController::class, 'showregister'])->name('showregister');
@@ -26,6 +27,7 @@ Route::post('/registeraction', [RegisterController::class, 'registeraction'])->n
 
 // forgot password
 Route::get('/forgot', [ForgotController::class, 'showforgot'])->name('showforgot');
+Route::get('/forgotaction', [ForgotController::class, 'forgotaction'])->name('forgotaction');
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'showdash'])->name('showdash');

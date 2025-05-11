@@ -39,7 +39,7 @@
                   <!-- <img src="assets/images/logos/logomra.png" width="180" alt=""> -->
                   <h3><b>Forgot Password</b></h3>
                 </a>
-                <form name="forgot" action="" method="post">
+                <form name="forgot" action="{{ route('forgotaction') }}" method="post">
                   @csrf
                   <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>

@@ -98,7 +98,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                     <div class="message-body">
                         <a href="{{ route('showlogin') }}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                        <a href="profile.php" class="btn btn-outline-primary mx-3 mt-2 d-block">Profile</a>
+                        <a href="" class="btn btn-outline-primary mx-3 mt-2 d-block">Profile</a>
                     </div>
                     </div>
                 </li>
@@ -109,7 +109,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Hi, FARISH</h5>
+                <h5 class="card-title fw-semibold mb-4">Hi, {{ $user->name }}</h5>
                 </div>
             </div>
             <div class="card">
@@ -120,4 +120,15 @@ data-sidebar-position="fixed" data-header-position="fixed">
         </div>
     </div>
 </div>
+@if(session('success'))
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    Swal.fire({
+      icon: 'success',
+      text: 'Welcome, {{ session('name_user') }}.',
+      confirmButtonColor: '#1B95CF'
+    });
+  });
+</script>
+@endif
 @endsection

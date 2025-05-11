@@ -39,7 +39,7 @@
                   <!-- <img src="assets/images/logos/logomra.png" width="180" alt=""> -->
                   <h3><b>Sign In</b></h3>
                 </a>
-                <form name="login" action="" method="post">
+                <form name="login" action="{{ route('loginaction') }}" method="post">
                   @csrf
                   <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
