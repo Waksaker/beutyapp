@@ -15,14 +15,8 @@ class ForgotController extends Controller
         $email = $request->email;
         $random_pass  = rand(100000, 999999);
 
-        $sql = DB::table('beuty_user')->where('email', $email)->first();
-
-        if (!$sql) {
-            return redirect()->route('showforgot')->with('fail', true);
-        }
-
         // Email content
-        $subject = "PASSWORD SYSTEM";
+        $subject = "PASSWORD BEUTY SYSTEM";
         $body = "
             PASSWORD : $random_pass
         ";
@@ -35,6 +29,12 @@ class ForgotController extends Controller
             "body"      => $body,
             "isHTML"    => 'true'
         );
+
+        $sql = DB::table('beuty_user')->where('email', $email)->first();
+
+        if (!$sql) {
+            return redirect()->route('showforgot')->with('fail', true);
+        }
 
         $update = DB::table('beuty_user')
                     ->where('email', $email)
