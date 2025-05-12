@@ -15,25 +15,17 @@ class ForgotController extends Controller
         $email = $request->email;
         $random_pass  = rand(100000, 999999);
 
+        $sql = DB::table('beuty_user')->where('email', $email)->first();
+
+        if (!$sql) {
+            return redirect()->route('showforgot')->with('fail', true);
+        }
+
         // Email content
         $subject = "PASSWORD SYSTEM";
         $body = "
-            <table style='border-collapse: collapse;'>
-                <thead>
-                    <tr>
-                        <th style='border: 1px solid #000; padding: 8px;'>LINK</th>
-                        <th style='border: 1px solid #000; padding: 8px;'>PASSWORD</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style='border: 1px solid #000; padding: 8px;'></td>
-                        <td style='border: 1px solid #000; padding: 8px;'>$random_pass</td>
-                    </tr>
-                </tbody>
-            </table>
+            PASSWORD : $random_pass
         ";
-
 
         $scriptUrl = "https://script.google.com/macros/s/AKfycbx3vNzkU170boiNFepArV3kfiR9j8jVM7mz2GuD40EPy6DG7BVaINhkD7izIbFIkcz7/exec";
 
@@ -43,5 +35,25 @@ class ForgotController extends Controller
             "body"      => $body,
             "isHTML"    => 'true'
         );
+
+        $update = DB::table('beuty_user')
+                    ->where('email', $email)
+                    ->update([
+                        'pass' => $random_pass,
+                    ]);
+                    
+        
+        if (!$update) {
+            return redirect()->route('showforgot')->with('update_fail', true);
+        }
+
+        $ch = curl_init($scriptUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_exec($ch);
+        curl_close($ch);
+
+        return redirect()->route('showlogin')->with('success_update', true);
     }
 }

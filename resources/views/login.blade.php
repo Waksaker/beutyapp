@@ -98,6 +98,14 @@
     confirmButtonColor: '#1B95CF'
   });
 </script>
+@elseif(session('success_update'))
+<script>
+  Swal.fire({
+    icon: 'success',
+    text: 'Success! A new password has been sent to your email address.',
+    confirmButtonColor: '#1B95CF'
+  });
+</script>
 @endif
 </body>
 </html>

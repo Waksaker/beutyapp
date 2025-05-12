@@ -27,7 +27,7 @@ Route::post('/registeraction', [RegisterController::class, 'registeraction'])->n
 
 // forgot password
 Route::get('/forgot', [ForgotController::class, 'showforgot'])->name('showforgot');
-Route::get('/forgotaction', [ForgotController::class, 'forgotaction'])->name('forgotaction');
+Route::post('/forgotaction', [ForgotController::class, 'forgotaction'])->name('forgotaction');
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'showdash'])->name('showdash');

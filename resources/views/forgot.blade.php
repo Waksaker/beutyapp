@@ -75,5 +75,26 @@
       form.submit();
     }
   </script>
+  @if (session('fail'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+          icon: 'warning',
+          text: 'Email not found. Please check and try again.',
+          confirmButtonColor: '#1B95CF'
+        });
+      });
+    </script>
+  @elseif(session('success_update'))
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+          icon: 'warning',
+          text: 'Update failed. Please try again later.',
+          confirmButtonColor: '#1B95CF'
+        });
+      });
+    </script>
+  @endif
 </body>
 </html>
