@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/mra.PNG') }}" />
-  
+  {{-- <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/mra.PNG') }}" /> --}}
+
   <!-- Android PWA Manifest -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0d6efd">
@@ -18,7 +18,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="MRA">
-  
+
   <!-- CSS Files -->
   <link rel="stylesheet" href="assets/css/styles.min.css">
   <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
@@ -64,7 +64,7 @@
   <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
   <script>
-    function validate() 
+    function validate()
     {
       form = document.login;
       if	(form.email.value == null || form.email.value=="")
