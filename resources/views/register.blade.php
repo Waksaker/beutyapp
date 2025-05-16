@@ -67,7 +67,7 @@
                     <sup><font style="color:red">*Please enter your confirm password</font></sup>
                   </div>
                   <div class="mb-3">
-                    <label for="location" class="form-label">Alamat</label>
+                    <label for="location" class="form-label">Location</label>
                     <textarea id="location" name="location" class="form-control" rows="4" placeholder=""></textarea>
                     <sup><font style="color:red">*Please enter your address</font></sup>
                   </div>

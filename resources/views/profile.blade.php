@@ -111,7 +111,7 @@ data-sidebar-position="fixed" data-header-position="fixed">
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                     <div class="message-body">
                         <a href="{{ route('showlogin') }}" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                        <a href="{{ route('showprofile') }}" class="btn btn-outline-primary mx-3 mt-2 d-block">Profile</a>
+                        <a href="" class="btn btn-outline-primary mx-3 mt-2 d-block">Profile</a>
                     </div>
                     </div>
                 </li>
@@ -127,31 +127,97 @@ data-sidebar-position="fixed" data-header-position="fixed">
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Dashboard</h5>
+                    <h5 class="card-title fw-semibold mb-4">Profile</h5>
+                    <form name="profile" action="{{ route('actionprofile') }}" method="post">
+                      @csrf
+                      <div class="customer_records">
+                        <div class="row mb-3">
+                            <input type="text" class="form-control mb-3" id="date" name="id" value="{{ $user->user_id }}" style="display: none;">
+                            <label for="datestart" class="col-sm-2 col-form-label">NAME :</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control mb-3" id="date" name="name" value="{{ $user->name }}">
+                            </div>
+                            <label for="datestart" class="col-sm-2 col-form-label">PASSWORD :</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control mb-1" id="password" name="password" value="{{ $user->pass }}">
+                            </div>
+                            <label for="dateend" class="col-sm-2 col-form-label">EMAIL :</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control mb-1" id="purpose" name="email" value="{{ $user->email }}">
+                            </div>
+                            <label for="datestart" class="col-sm-2 col-form-label">PHONE NUMBER :</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control mb-3" id="date" name="number" value="{{ $user->no_tel }}">
+                            </div>
+                            <label for="datestart" class="col-sm-2 col-form-label">LOCATION</label>
+                            <div class="col-sm-4">
+                              <textarea id="location" name="location" class="form-control" rows="4">{{ $user->location }}</textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mt-3" onClick="validate()">UPDATE</button>
+                      </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-  @if(session('success'))
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      Swal.fire({
-        icon: 'success',
-        text: 'Welcome, ' + @json(session('name_user')) + '.',
-        confirmButtonColor: '#1B95CF'
-      });
+@if(session('fail_profile'))
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    Swal.fire({
+      icon: 'warning',
+      text: 'Failed to update profile. Please try again.',
+      confirmButtonColor: '#1B95CF'
     });
-  </script>
-  @elseif (session('success_profile'))
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      Swal.fire({
-        icon: 'success',
-        text: 'Profile updated successfully.',
-        confirmButtonColor: '#1B95CF'
-      });
-    });
-  </script>
+  });
+</script>
 @endif
+<script>
+  function validate() {
+    profile = document.profile;
+    if (profile.name.value==null||profile.name.value=="") {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please fill in your correct name',
+        confirmButtonColor: '#1B95CF'
+      })
+      form.name.focus();
+      return;
+    } else if (profile.password.value==null||profile.password.value=="") {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please fill in your correct password!',
+        confirmButtonColor: '#1B95CF'
+      })
+      form.password.focus();
+      return;
+    } else if (profile.email.value==null||profile.email.value=="") {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please fill in your correct email!',
+        confirmButtonColor: '#1B95CF'
+      })
+      form.email.focus();
+      return;
+    } else if (profile.number.value==null||profile.number.value=="") {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please fill in your correct number!',
+        confirmButtonColor: '#1B95CF'
+      })
+      form.number.focus();
+      return;
+    } else if (profile.location.value==null||profile.location.value=="") {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please fill in your correct location!',
+        confirmButtonColor: '#1B95CF'
+      })
+      form.location.focus();
+      return;
+    }
+    profile.submit();
+  }
+</script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -31,3 +32,7 @@ Route::post('/forgotaction', [ForgotController::class, 'forgotaction'])->name('f
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'showdash'])->name('showdash');
+
+// profile
+Route::get('/profile', [ProfileController::class, 'showprofile'])->name('showprofile');
+Route::post('/actionprofile', [ProfileController::class, 'actionprofile'])->name('actionprofile');
