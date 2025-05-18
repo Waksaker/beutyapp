@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,9 @@ Route::get('/dashboard', [DashboardController::class, 'showdash'])->name('showda
 // profile
 Route::get('/profile', [ProfileController::class, 'showprofile'])->name('showprofile');
 Route::post('/actionprofile', [ProfileController::class, 'actionprofile'])->name('actionprofile');
+
+// order
+Route::get('/listorder', [OrderController::class, 'showorder'])->name('showorder');
+Route::get('/listorders', [OrderController::class, 'listorder'])->name(name: 'listorder');
+Route::get('/order', [OrderController::class, 'order'])->name('order');
+Route::post('/orderaction', [OrderController::class, 'orderaction'])->name('orderaction');

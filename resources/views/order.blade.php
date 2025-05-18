@@ -73,34 +73,34 @@ data-sidebar-position="fixed" data-header-position="fixed">
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Profile</h5>
-                    <form name="profile" action="{{ route('actionprofile') }}" method="post">
+                    <h5 class="card-title fw-semibold mb-4">Order Items</h5>
+                    <form name="order" action="{{ route('orderaction') }}" method="post">
                       @csrf
                       <div class="customer_records">
                         <div class="row mb-3">
-                            <input type="text" class="form-control mb-3" id="date" name="id" value="{{ $user->user_id }}" style="display: none;">
                             <label for="datestart" class="col-sm-2 col-form-label">NAME :</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control mb-3" id="date" name="name" value="{{ $user->name }}">
-                            </div>
-                            <label for="datestart" class="col-sm-2 col-form-label">PASSWORD :</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control mb-1" id="password" name="password" value="{{ $user->pass }}">
-                            </div>
-                            <label for="dateend" class="col-sm-2 col-form-label">EMAIL :</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control mb-1" id="purpose" name="email" value="{{ $user->email }}">
+                                <input type="text" class="form-control mb-1" id="name" name="name" value="{{ $user->name }}">
                             </div>
                             <label for="datestart" class="col-sm-2 col-form-label">PHONE NUMBER :</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control mb-3" id="date" name="number" value="{{ $user->no_tel }}">
+                                <input type="text" class="form-control mb-3" id="number" name="number" value="{{ $user->no_tel }}">
                             </div>
-                            <label for="datestart" class="col-sm-2 col-form-label">LOCATION</label>
+                            <label for="datestart" class="col-sm-2 col-form-label">ITEM :</label>
                             <div class="col-sm-4">
-                              <textarea id="location" name="location" class="form-control" rows="4">{{ $user->location }}</textarea>
+                                <select name="item" id="item" class="form-control mb-3" onchange="priceitem()">
+                                  <option value="">Please Choose</option>
+                                  @foreach ($items as $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                  @endforeach
+                                </select>
+                            </div>
+                            <label for="datestart" class="col-sm-2 col-form-label">QUANTITY :</label>
+                            <div class="col-sm-4">
+                              <input type="text" class="form-control mb-1" id="quantity" name="quantity" value="">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" onClick="validate()">UPDATE</button>
+                        <button type="button" class="btn btn-primary mt-3" onClick="validate()">SUBMIT</button>
                       </div>
                     </form>
                 </div>
@@ -108,62 +108,48 @@ data-sidebar-position="fixed" data-header-position="fixed">
         </div>
     </div>
 </div>
-@if(session('fail_profile'))
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    Swal.fire({
-      icon: 'warning',
-      text: 'Failed to update profile. Please try again.',
-      confirmButtonColor: '#1B95CF'
+@if (session('fail_insert'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'success',
+        text: 'Your order fail. Please fill form again',
+        confirmButtonColor: '#1B95CF'
+      });
     });
-  });
-</script>
+  </script>
+@elseif (session('fail_item'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'success',
+        text: 'Fail item. Please choose item again',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
 @endif
 <script>
   function validate() {
-    profile = document.profile;
-    if (profile.name.value==null||profile.name.value=="") {
+    order = document.order;
+    if (order.item.value==null||order.item.value=="") {
       Swal.fire({
         icon: 'warning',
-        text: 'Please fill in your correct name',
+        text: 'Please choose item',
         confirmButtonColor: '#1B95CF'
       })
-      form.name.focus();
+      form.item.focus();
       return;
-    } else if (profile.password.value==null||profile.password.value=="") {
+    } else if (order.quantity.value==null||order.quantity.value=="") {
       Swal.fire({
         icon: 'warning',
-        text: 'Please fill in your correct password!',
+        text: 'Please fill quantity',
         confirmButtonColor: '#1B95CF'
       })
-      form.password.focus();
-      return;
-    } else if (profile.email.value==null||profile.email.value=="") {
-      Swal.fire({
-        icon: 'warning',
-        text: 'Please fill in your correct email!',
-        confirmButtonColor: '#1B95CF'
-      })
-      form.email.focus();
-      return;
-    } else if (profile.number.value==null||profile.number.value=="") {
-      Swal.fire({
-        icon: 'warning',
-        text: 'Please fill in your correct number!',
-        confirmButtonColor: '#1B95CF'
-      })
-      form.number.focus();
-      return;
-    } else if (profile.location.value==null||profile.location.value=="") {
-      Swal.fire({
-        icon: 'warning',
-        text: 'Please fill in your correct location!',
-        confirmButtonColor: '#1B95CF'
-      })
-      form.location.focus();
+      form.quantity.focus();
       return;
     }
-    profile.submit();
+    order.submit();
   }
 </script>
 @endsection
