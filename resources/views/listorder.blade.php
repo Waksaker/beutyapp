@@ -79,9 +79,9 @@ data-sidebar-position="fixed" data-header-position="fixed">
                           <div align="right">
                               <a href="{{ route('order') }}" class="btn btn-primary py-8 fs-4 mb-4 rounded-2">Order</a>
                             </div>
-                          <div class="form-group row">
+                          <div class="form-group row" style="gap: 10px;">
                               <h1 class="col-sm-4 col-form-label">PLEASE CHOOSE</h1>
-                              <div class="col-sm-4">
+                              <div class="col-sm-3">
                                   <select class="form-control" name="tahun" id="tahun"  value=''>
                                       @php
                                           $tahunmin = now()->year; // Tahun semasa
