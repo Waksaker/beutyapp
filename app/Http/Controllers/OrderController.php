@@ -77,4 +77,31 @@ class OrderController extends Controller
 
         return redirect()->route('showorder')->with('success_order', true);
     }
+
+    public function deleteorder($name, $date, $item)
+    {
+        // Contoh padam berdasarkan 3 kolum
+        $delete = DB::table('vw_pesanan_user')
+                    ->where('name', $name)
+                    ->where('date', $date)
+                    ->where('item', $item)
+                    ->delete();
+
+        if(!$delete) {
+            return redirect()->route('showorder')->with('fail_delete', true);
+        }
+
+        return redirect()->route('showorder')->with('success_delete', true);
+    }
+
+    public function invoiceorder($name, $date, $item)
+    {
+        $user = DB::table('vw_pesanan_user')
+                    ->where('name', $name)
+                    ->where('date', $date)
+                    ->where('item', $item)
+                    ->first(); // info user
+
+        return view('print', compact('user'));
+    }
 }

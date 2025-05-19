@@ -18,10 +18,10 @@
         -webkit-overflow-scrolling: touch;
     }
 </style>
-{{-- <div class="mt-3" align="right">
-    <a href="" target="_blank" class="btn btn-primary">PRINT</a>
+<div class="mt-3" align="right">
+    <a href="" target="_blank" class="btn btn-primary">Print All</a>
     <button href="" class="btn btn-warning" onclick="">Delete All</button>
-</div> --}}
+</div>
 <br>
 <div class="row">
     <div class="col-12">
@@ -49,8 +49,13 @@
                                 </div>
                             </td>
                             <td class="action-cell">
-                                <a href="" class="btn btn-primary"><img src="{{ asset('assets/images/print.png') }}" alt="" style="width: 24px; height: 24;"></a>
-                                <a href="" class="btn btn-danger"><img src="{{ asset('assets/images/Trash_Can.png') }}" alt="" style="width: 24px; height: 24;"></a>
+                                <a href="{{ route('invoiceorder', ['name' => $itemorders->name, 'date' => $itemorders->date, 'item' => $itemorders->item]) }}" class="btn btn-primary" target="_blank">
+                                    <img src="{{ asset('assets/images/print.png') }}" alt="" style="width: 24px; height: 24;">
+                                </a>
+                                <a href="" class="btn btn-primary"><img src="{{ asset('assets/images/Pencil.png') }}" alt="" style="width: 24px; height: 24;"></a>
+                                <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ route('deleteorder', ['name' => $itemorders->name, 'date' => $itemorders->date, 'item' => $itemorders->item]) }}')">
+                                    <img src="{{ asset('assets/images/Trash_Can.png') }}" alt="" style="width: 24px; height: 24;">
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -69,4 +74,22 @@
         console.log("DataTable Columns:", table.columns().header().toArray());
         console.log("DataTable Rows Count:", table.rows().count());
     });
+</script>
+<script>
+    function confirmDelete(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to delete this order?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
 </script>

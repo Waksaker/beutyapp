@@ -131,6 +131,26 @@ data-sidebar-position="fixed" data-header-position="fixed">
       });
     });
   </script>
+@elseif (session('success_delete'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'success',
+        text: 'Delete item success',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
+@elseif (session('fail_delete'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Delete item fail',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
 @endif
 <script>
   function getdata(value, name) {

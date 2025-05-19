@@ -43,3 +43,6 @@ Route::get('/listorder', [OrderController::class, 'showorder'])->name('showorder
 Route::get('/listorders', [OrderController::class, 'listorder'])->name(name: 'listorder');
 Route::get('/order', [OrderController::class, 'order'])->name('order');
 Route::post('/orderaction', [OrderController::class, 'orderaction'])->name('orderaction');
+Route::get('/delete/{name}/{date}/{item}', [OrderController::class, 'deleteorder'])->name('deleteorder');
+Route::get('/invoice/{name}/{date}/{item}', [OrderController::class, 'invoiceorder'])->name('invoiceorder');
+Route::get('/invoiceall/{name}/{bulan}', [OrderController::class, 'invoiceallorder'])->name('invoiceallorder');
