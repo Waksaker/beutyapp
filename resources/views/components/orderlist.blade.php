@@ -19,7 +19,7 @@
     }
 </style>
 <div class="mt-3" align="right">
-    <a href="" target="_blank" class="btn btn-primary">Print All</a>
+    <a href="{{ route('invoiceallorder', ['name' => $name, 'bulan' => $bulan]) }}" target="_blank" class="btn btn-primary">Print All</a>
     <button href="" class="btn btn-warning" onclick="">Delete All</button>
 </div>
 <br>
@@ -41,7 +41,7 @@
                             <td>
                                 <div style="min-width: 400px;">
                                     <strong>Name:</strong> {{ $itemorders->name ?? '-' }}<br>    
-                                    <strong>Date:</strong> {{ $itemorders->date ?? '-' }}<br>    
+                                    <strong>Date:</strong> {{ \Carbon\Carbon::parse($itemorders->date)->format('j/n/Y') ?? '-' }}<br> 
                                     <strong>Item:</strong> {{ $itemorders->item ?? '-' }}<br>    
                                     <strong>Price:</strong> {{ $itemorders->price ?? '-' }}<br>    
                                     <strong>Quantity:</strong> {{ $itemorders->quantity ?? '-' }}<br>    

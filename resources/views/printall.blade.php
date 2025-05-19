@@ -35,35 +35,37 @@
                 <h2 style="text-align: center;">INVOICE</h2>
 
                 <p><strong>Name:</strong> {{ $user->name }}</p>
-                <p><strong>Phone Number:</strong> {{ $user->tele_no }}</p>
-                <p><strong>Order Date:</strong> {{ \Carbon\Carbon::parse($user->date)->format('d-m-Y') }}</p>
+                <p><strong>Phone Number:</strong> {{ $user->no_tel }}</p>
+                <p><strong>Mount:</strong> {{ $namebulan }}</p>
 
                 <hr>
 
                 <table width="100%" border="1" cellspacing="0" cellpadding="8">
                     <thead style="background-color: #f0f0f0;">
                         <tr>
-                            <th>No</th>
-                            <th>Item Name</th>
-                            <th>Unit Price (RM)</th>
-                            <th>Quantity</th>
-                            <th>Total (RM)</th>
+                            <th style="text-align: center; vertical-align: middle;">No</th>
+                            <th style="text-align: center; vertical-align: middle;">Item Name</th>
+                            <th style="text-align: center; vertical-align: middle;">Unit Price (RM)</th>
+                            <th style="text-align: center; vertical-align: middle;">Quantity</th>
+                            <th style="text-align: center; vertical-align: middle;">Total (RM)</th>
                         </tr>
                     </thead>
                     <tbody>
-                          <tr>
-                              <td>1</td>
-                              <td>{{ $user->item }}</td>
-                              <td>{{ number_format($user->price, 2) }}</td>
-                              <td>{{ $user->quantity }}</td>
-                              <td>{{ number_format($user->price * $user->quantity, 2) }}</td>
-                          </tr>
+                        @foreach ($allinvoice as $key => $allinvoices)
+                            <tr>
+                                <td style="text-align: center; vertical-align: middle;">{{ $key + 1 }}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{ $allinvoices->item }}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{ number_format($allinvoices->price, 2) }}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{ $allinvoices->quantity }}</td>
+                                <td style="text-align: center; vertical-align: middle;">{{ number_format($allinvoices->price * $allinvoices->quantity, 2) }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
                 <hr>
 
-                <h3 style="text-align: right;">Grand Total: RM {{ number_format($user->amount, 2) }}</h3>
+                <h3 style="text-align: right;">Grand Total: RM {{ number_format($amount, 2) }}</h3>
               </div>
             </div>
         </div>

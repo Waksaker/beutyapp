@@ -78,13 +78,14 @@ data-sidebar-position="fixed" data-header-position="fixed">
                       @csrf
                       <div class="customer_records">
                         <div class="row mb-3">
-                            <label for="datestart" class="col-sm-2 col-form-label">NAME :</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control mb-1" id="name" name="name" value="{{ $user->name }}">
-                            </div>
+                            <input type="text" class="form-control mb-1" id="name" name="name" value="{{ $user->name }}" style="display: none;">
                             <label for="datestart" class="col-sm-2 col-form-label">PHONE NUMBER :</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control mb-3" id="number" name="number" value="{{ $user->no_tel }}">
+                            </div>
+                            <label for="datestart" class="col-sm-2 col-form-label">DATE :</label>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control mb-3" id="date" name="date">
                             </div>
                             <label for="datestart" class="col-sm-2 col-form-label">ITEM :</label>
                             <div class="col-sm-4">
@@ -147,6 +148,14 @@ data-sidebar-position="fixed" data-header-position="fixed">
         confirmButtonColor: '#1B95CF'
       })
       form.quantity.focus();
+      return;
+    } else if (order.date.value==null||order.date.value=="") {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please fill date',
+        confirmButtonColor: '#1B95CF'
+      })
+      form.date.focus();
       return;
     }
     order.submit();

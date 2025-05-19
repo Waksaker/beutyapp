@@ -43,20 +43,20 @@
                 <table width="100%" border="1" cellspacing="0" cellpadding="8">
                     <thead style="background-color: #f0f0f0;">
                         <tr>
-                            <th>No</th>
-                            <th>Item Name</th>
-                            <th>Unit Price (RM)</th>
-                            <th>Quantity</th>
-                            <th>Total (RM)</th>
+                            <th style="text-align: center; vertical-align: middle;">No</th>
+                            <th style="text-align: center; vertical-align: middle;">Item Name</th>
+                            <th style="text-align: center; vertical-align: middle;">Unit Price (RM)</th>
+                            <th style="text-align: center; vertical-align: middle;">Quantity</th>
+                            <th style="text-align: center; vertical-align: middle;">Total (RM)</th>
                         </tr>
                     </thead>
                     <tbody>
                           <tr>
-                              <td>1</td>
-                              <td>{{ $user->item }}</td>
-                              <td>{{ number_format($user->price, 2) }}</td>
-                              <td>{{ $user->quantity }}</td>
-                              <td>{{ number_format($user->price * $user->quantity, 2) }}</td>
+                              <td style="text-align: center; vertical-align: middle;">1</td>
+                              <td style="text-align: center; vertical-align: middle;">{{ $user->item }}</td>
+                              <td style="text-align: center; vertical-align: middle;">{{ number_format($user->price, 2) }}</td>
+                              <td style="text-align: center; vertical-align: middle;">{{ $user->quantity }}</td>
+                              <td style="text-align: center; vertical-align: middle;">{{ number_format($user->price * $user->quantity, 2) }}</td>
                           </tr>
                     </tbody>
                 </table>

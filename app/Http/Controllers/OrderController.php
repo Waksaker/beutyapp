@@ -28,7 +28,9 @@ class OrderController extends Controller
                 ->get();
 
         return view('components.orderlist', [
-            'itemorder' => $sql
+            'itemorder' => $sql,
+            'bulan' => $bulan,
+            'name' => $name
         ]);
     }
 
@@ -48,7 +50,7 @@ class OrderController extends Controller
         $item_name = $request->item;
         $quantity = $request->quantity;
         $created = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
-        $date = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d');
+        $date = $request->date;
 
         // Ambil item berdasarkan nama
         $item = DB::table('vw_item')->where('name', $item_name)->first();
@@ -103,5 +105,52 @@ class OrderController extends Controller
                     ->first(); // info user
 
         return view('print', compact('user'));
+    }
+
+    public function invoiceallorder($name, $bulan) {
+        $allinvoice = DB::table('vw_pesanan_user')
+                        ->where('name', $name)
+                        ->whereMonth('date', $bulan)
+                        ->get();
+
+        $user = DB::table('beuty_user')->where('name', $name)->first();
+
+        $amount = DB::table('vw_pesanan_user')
+                    ->where('name', $name)
+                    ->whereMonth('date', $bulan)
+                    ->sum('amount');
+
+        if ($bulan == '01') {
+            $namebulan = "January";
+        } elseif ($bulan == '02') {
+            $namebulan = "February";
+        } elseif ($bulan == '03') {
+            $namebulan  = "March";
+        } elseif ($bulan == "04") {
+            $namebulan = "April";
+        } elseif ($bulan == '05') {
+            $namebulan = "May";
+        } elseif ($bulan == '06') {
+            $namebulan = "June";
+        } elseif ($bulan == '07') {
+            $namebulan = "July";
+        } elseif ($bulan == '08') {
+            $namebulan = "August";
+        } elseif ($bulan == '09') {
+            $namebulan = "September";
+        } elseif ($bulan == '10') {
+            $namebulan = "October";
+        } elseif ($bulan == '11') {
+            $namebulan = "November";
+        } elseif ($bulan == '12') {
+            $namebulan = "December";
+        }
+
+        return view('printall', [
+            'allinvoice' => $allinvoice,
+            'namebulan' => $namebulan,
+            'user' => $user,
+            'amount' => $amount
+        ]);
     }
 }
