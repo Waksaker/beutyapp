@@ -20,7 +20,7 @@
 </style>
 <div class="mt-3" align="right">
     <a href="{{ route('invoiceallorder', ['name' => $name, 'bulan' => $bulan]) }}" target="_blank" class="btn btn-primary">Print All</a>
-    <button href="" class="btn btn-warning" onclick="">Delete All</button>
+    <a href="#" class="btn btn-warning" onclick="deleteallorder('{{ route('deleteallorder', ['name' => $name, 'bulan' => $bulan]) }}')">Delete All</a>
 </div>
 <br>
 <div class="row">
@@ -80,6 +80,24 @@
         Swal.fire({
             title: 'Are you sure?',
             text: "Do you really want to delete this order?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+</script>
+<script>
+    function deleteallorder(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action will delete all invoices for this month. This action cannot be undone.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',

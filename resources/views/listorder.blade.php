@@ -146,7 +146,27 @@ data-sidebar-position="fixed" data-header-position="fixed">
     document.addEventListener('DOMContentLoaded', function () {
       Swal.fire({
         icon: 'warning',
-        text: 'Delete item fail',
+        text: 'Delete invoice fail',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
+@elseif(session('fail_delete_all_invoice'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Delete all invoice fail',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
+@elseif(session('success_delete_all_invoice'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'success',
+        text: 'Delete all invoice success',
         confirmButtonColor: '#1B95CF'
       });
     });

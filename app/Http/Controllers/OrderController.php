@@ -153,4 +153,30 @@ class OrderController extends Controller
             'amount' => $amount
         ]);
     }
+
+    public function deleteallorder($name, $bulan) {
+
+        $deleteallorder = DB::table('vw_pesanan_user')
+                            ->where('name', $name)
+                            ->whereMonth('date', $bulan)
+                            ->delete();
+
+        if (!$deleteallorder) {
+            return redirect()->route('showorder')->with('fail_delete_all_invoice', true);
+        }
+
+        return redirect()->route('showorder')->with('success_delete_all_invoice', true);
+    }
+
+    public function ordersetting($name, $date, $item) {
+        $settingorder = DB::table('vw_pesanan_user')
+                            ->where('name', $name)
+                            ->where('date', $date)
+                            ->where('item', $item)
+                            ->first();
+        
+        return view('orderset', [
+            'orders' => $settingorder
+        ]);
+    }
 }
