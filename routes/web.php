@@ -48,3 +48,4 @@ Route::get('/invoice/{name}/{date}/{item}', [OrderController::class, 'invoiceord
 Route::get('/invoiceall/{name}/{bulan}', [OrderController::class, 'invoiceallorder'])->name('invoiceallorder');
 Route::get('/delete_all_order/{name}/{bulan}', [OrderController::class, 'deleteallorder'])->name('deleteallorder');
 Route::get('/order_setting/{name}/{date}/{item}', [OrderController::class, 'ordersetting'])->name('ordersetting');
+Route::post('/update_order', [OrderController::class, 'update_order'])->name('update_order');

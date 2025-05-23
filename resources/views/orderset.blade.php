@@ -74,10 +74,11 @@ data-sidebar-position="fixed" data-header-position="fixed">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Order Items</h5>
-                    <form name="order" action="{{ route('orderaction') }}" method="post">
+                    <form name="order" action="{{ route('update_order') }}" method="post">
                       @csrf
                       <div class="customer_records">
                         <div class="row mb-3">
+                            <input type="text" id="id" name="id" value="{{ $orders->id }}" style="display: none;">
                             <input type="text" class="form-control mb-1" id="name" name="name" value="{{ $orders->name }}" style="display: none;">
                             <label for="datestart" class="col-sm-2 col-form-label">PHONE NUMBER :</label>
                             <div class="col-sm-4">
@@ -127,6 +128,16 @@ data-sidebar-position="fixed" data-header-position="fixed">
       Swal.fire({
         icon: 'success',
         text: 'Fail item. Please choose item again',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
+@elseif (session(''))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'success',
+        text: 'Your update order fail. Please fill form again',
         confirmButtonColor: '#1B95CF'
       });
     });

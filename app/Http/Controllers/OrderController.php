@@ -184,4 +184,39 @@ class OrderController extends Controller
             'items' => $item
         ]);
     }
+
+    public function update_order(Request $request) {
+        $name = $request->name;
+        $number = $request->number;
+        $item_name = $request->item;
+        $quantity = $request->quantity;
+        $created = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+        $date = $request->date;
+        $id = $request->id;
+
+        // Ambil item berdasarkan nama
+        $item = DB::table('vw_item')->where('name', $item_name)->first();
+
+        // Jika item tiada, bagi respon error
+        if (!$item) {
+            return redirect()->route('order')->with('fail_item', true);
+        }
+
+        $amount = $item->price * $quantity;
+
+        $insert = DB::table('vw_pesanan_user')
+                ->where('id', $id)
+                ->update([
+                    'name' => $name,
+                    'item' => $item->name,
+                    'price' => $item->price,
+                    'quantity' => $quantity,
+                    'amount' => $amount,
+                    'tele_no' => $number,
+                    'date' => $date,
+                    'created_at' => $created
+                ]);
+
+        return redirect()->route('showorder')->with('success_update', true);
+    }
 }

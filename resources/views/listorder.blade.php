@@ -171,6 +171,16 @@ data-sidebar-position="fixed" data-header-position="fixed">
       });
     });
   </script>
+@elseif(session('success_update'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+        icon: 'success',
+        text: 'Your update order successful. Please check from list order',
+        confirmButtonColor: '#1B95CF'
+      });
+    });
+  </script>
 @endif
 <script>
   function getdata(value, name) {
