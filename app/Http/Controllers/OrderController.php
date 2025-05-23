@@ -174,9 +174,14 @@ class OrderController extends Controller
                             ->where('date', $date)
                             ->where('item', $item)
                             ->first();
+        $user = DB::table('beuty_user')->where('name', $name)->first();
+
+        $item = DB::table('vw_item')->get();
         
         return view('orderset', [
-            'orders' => $settingorder
+            'orders' => $settingorder,
+            'user' => $user,
+            'items' => $item
         ]);
     }
 }

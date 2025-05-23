@@ -52,7 +52,7 @@
                                 <a href="{{ route('invoiceorder', ['name' => $itemorders->name, 'date' => $itemorders->date, 'item' => $itemorders->item]) }}" class="btn btn-primary" target="_blank">
                                     <img src="{{ asset('assets/images/print.png') }}" alt="" style="width: 24px; height: 24;">
                                 </a>
-                                <a href="" class="btn btn-primary"><img src="{{ asset('assets/images/Pencil.png') }}" alt="" style="width: 24px; height: 24;"></a>
+                                <a href="{{ route('ordersetting', ['name' => $itemorders->name, 'date' => $itemorders->date, 'item' => $itemorders->item]) }}" class="btn btn-primary"><img src="{{ asset('assets/images/Pencil.png') }}" alt="" style="width: 24px; height: 24;"></a>
                                 <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ route('deleteorder', ['name' => $itemorders->name, 'date' => $itemorders->date, 'item' => $itemorders->item]) }}')">
                                     <img src="{{ asset('assets/images/Trash_Can.png') }}" alt="" style="width: 24px; height: 24;">
                                 </a>

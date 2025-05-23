@@ -78,27 +78,29 @@ data-sidebar-position="fixed" data-header-position="fixed">
                       @csrf
                       <div class="customer_records">
                         <div class="row mb-3">
-                            <input type="text" class="form-control mb-1" id="name" name="name" value="{{ $user->name }}" style="display: none;">
+                            <input type="text" class="form-control mb-1" id="name" name="name" value="{{ $orders->name }}" style="display: none;">
                             <label for="datestart" class="col-sm-2 col-form-label">PHONE NUMBER :</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control mb-3" id="number" name="number" value="{{ $user->no_tel }}">
+                                <input type="text" class="form-control mb-3" id="number" name="number" value="{{ $orders->tele_no }}">
                             </div>
                             <label for="datestart" class="col-sm-2 col-form-label">DATE :</label>
                             <div class="col-sm-4">
-                                <input type="date" class="form-control mb-3" id="date" name="date">
+                                <input type="date" class="form-control mb-3" id="date" name="date" value="{{ $orders->date }}">
                             </div>
                             <label for="datestart" class="col-sm-2 col-form-label">ITEM :</label>
                             <div class="col-sm-4">
-                                <select name="item" id="item" class="form-control mb-3" onchange="priceitem()">
-                                  <option value="">Please Choose</option>
-                                  @foreach ($items as $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                  @endforeach
+                                <select name="item" id="item" class="form-control mb-3">
+                                    <option value="">Please Choose</option>
+                                    @foreach ($items as $item)
+                                        <option value="{{ $item->name }}" {{ $orders->item == $item->name ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <label for="datestart" class="col-sm-2 col-form-label">QUANTITY :</label>
                             <div class="col-sm-4">
-                              <input type="text" class="form-control mb-1" id="quantity" name="quantity" value="">
+                              <input type="text" class="form-control mb-1" id="quantity" name="quantity" value="{{ $orders->quantity }}">
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary mt-3" onClick="validate()">SUBMIT</button>
